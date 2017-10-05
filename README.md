@@ -18,6 +18,7 @@ Help you remember stuff during the day, by reminding you directly at the prompt 
 * Install the executable and configuration file to `~/.pms`:
 
     install -Dm755 pms ~/.pms/pms
+
     install -Dm755 time.example.conf ~/.pms/time.conf
 
 * Edit `~/.pms/time.conf` to your liking.
