@@ -26,9 +26,11 @@ install -Dm755 time.example.conf ~/.pms/time.conf
 
 * Add the following to your `~/.zshrc`:
 
-    if [ $HOST = work_pc ] && [ ! -n "$SSH_TTY" ]; then
-      precmd() { $HOME/.pms/pms }
-    fi
+```
+if [ $HOST = work_pc ] && [ ! -n "$SSH_TTY" ]; then
+  precmd() { $HOME/.pms/pms }
+fi
+```
 
 * Change `work_pc` to whatever the hostname of your work pc is.
 
