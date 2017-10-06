@@ -1,24 +1,40 @@
 #!/bin/sh
 
-echo '----------------------------------'
-echo 'Promptmessages installation script'
-echo '----------------------------------'
+cat << dog
 
+----=[ Prompt Messages user setup script ]=----
+
+dog
+
+SOURCE_DIR=.
 TARGET_DIR=~/.config/pmsg
+
+# msg outputs a topic + green message, with a final newline
+msg() {
+  local topic="$1"
+  shift
+  if [ ! -z "$*" ]; then
+    printf "%b" "* \e[1;37m[\e[0m\e[1;34m$topic\e[0m\e[1;37m]"
+    printf ' %.0s' $(seq ${#topic} 25)
+    printf "%b\n" "\e[0;32m$*\e[0m"
+  fi
+}
 
 # Install $TARGET_DIR/pmsg
 if [ -x $TARGET_DIR/pmsg ]; then
   # Only upgrade the executable if the files differ
-  diff -q pmsg $TARGET_DIR/pmsg 2>&1 1>/dev/null && echo 'pmsg was already installed' || install -Dm755 pmsg $TARGET_DIR/pmsg
+  diff -q "$SOURCE_DIR/pmsg" "$TARGET_DIR/pmsg" 2>&1 1>/dev/null && msg pmsg 'Already in place' || (msg pmsg "Installing to $TARGET_DIR/pmsg"; install -Dm755 "$SOURCE_DIR/pmsg" "$TARGET_DIR/pmsg")
 else
-  echo "Installing $TARGET_DIR/pmsg"
-  install -Dm755 pmsg $TARGET_DIR/pmsg
+  msg pmsg "Installing to $TARGET_DIR/pmsg"
+  install -Dm755 "$SOURCE_DIR/pmsg" "$TARGET_DIR/pmsg"
 fi
 
 # Install $TARGET_DIR/time.conf
 if [ ! -f $TARGET_DIR/time.conf ]; then
-  echo "Installing $TARGET_DIR/time.conf"
-  install -Dm644 time.example.conf $TARGET_DIR/time.conf
+  msg 'time.conf' "Installing to $TARGET_DIR/time.conf"
+  install -Dm644 "$SOURCE_DIR/time.example.conf" "$TARGET_DIR/time.conf"
+else
+  msg 'time.conf' "Already in place"
 fi
 
 # Set up zsh, if not already set up
@@ -27,9 +43,9 @@ if [ -f ~/.zshrc ]; then
   grep -q -F 'precmd() {' ~/.zshenv && already=1
   grep -q -F 'precmd() {' ~/.zshrc && already=1
   if [ "$already" == "1" ]; then
-    echo 'zsh was already set up'
+    msg zsh 'Already set up'
   else
-    echo 'setting up zsh'
+    msg zsh 'Setting up'
     cat << EOF >> ~/.zshrc
 
 # Prompt Messages
@@ -49,9 +65,9 @@ if [ -f ~/.bashrc ]; then
   grep -q -F PROMPT_COMMAND= ~/.bash_profile && already=1
   grep -q -F PROMPT_COMMAND= ~/.bashrc && already=1
   if [ "$already" == "1" ]; then
-    echo 'bash was already set up'
+    msg bash 'Already set up'
   else
-    echo 'setting up bash'
+    msg bash 'Setting up'
     cat << EOF >> ~/.bashrc
 
 # Prompt Messages
@@ -70,9 +86,9 @@ if [ -f ~/.config/fish/config.fish ]; then
   already=0
   grep -q -F 'function pmsg --on-event fish_prompt' ~/.config/fish/config.fish && already=1
   if [ "$already" == "1" ]; then
-    echo 'fish was already set up'
+    msg fish 'Already set up'
   else
-    echo 'setting up fish'
+    msg fish 'Setting up'
     cat << EOF >> ~/.config/fish/config.fish
 
 # Prompt Messages
@@ -90,6 +106,4 @@ EOF
   fi
 fi
 
-
-echo '----------------------------------'
-echo "Now edit $TARGET_DIR/time.conf and restart your shell."
+echo -e "\nPlease edit $TARGET_DIR/time.conf and restart your shell.\n"
