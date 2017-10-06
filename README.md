@@ -28,13 +28,17 @@ install -Dm755 time.example.conf ~/.pms/time.conf
 
 ```
 if [ $HOST = work_pc ] && [ ! -n "$SSH_TTY" ]; then
-  precmd() { $HOME/.pms/pms }
+  off() { unset -f precmd }
+  on() { precmd() { $HOME/.pms/pms } }
+  on
 fi
 ```
 
 * Change `work_pc` to whatever the hostname of your work pc is.
 
 * Check that `~/.pms/pms` outputs messages as expected.
+
+* Typing `off` or `on` should disable or enable the prompt notification.
 
 ## Features and limitations
 
