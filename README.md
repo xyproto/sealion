@@ -1,6 +1,6 @@
-# Promptmessages
+# Prompt Messages
 
-Display messages at the ZSH or Bash prompt at certain time intervals during the day.
+Display messages right before the prompt at certain time intervals during the day.
 
 ## Goal
 
@@ -11,7 +11,7 @@ Help you remember stuff during the day, by reminding you directly at the prompt 
 ### Requirements
 
 * Python 3
-* zsh or bash
+* bash, fish or zsh
 
 ### User installation
 
@@ -35,6 +35,26 @@ on() {
 }
 # Enable prompt messages if on the right host and not over ssh
 [ $HOSTNAME = "work_pc" ] && [ ! -n "$SSH_TTY" ] && on
+```
+
+* Change `work_pc` to whatever the hostname of your work pc is.
+
+### Fish setup
+
+* Add the following to your `~/.config/fish/config.fish`:
+
+```
+# Prompt Messages
+function on
+  function pms --on-event fish_prompt
+    /home/afr/.config/pms//pms
+  end
+  function off
+    functions -e pms
+  end
+end
+# Enable prompt messages if on the right host and not over ssh
+if [ (hostname) = "work_pc" ]; and not count $SSH_TTY > /dev/null; on; end
 ```
 
 * Change `work_pc` to whatever the hostname of your work pc is.
