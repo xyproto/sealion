@@ -16,12 +16,12 @@ Help you remember stuff during the day, by reminding you directly at the prompt 
 ### User installation
 
 * Run `./install.sh`, which will do the following:
-  * Place the script in `~/.pms/pms`, or upgrade an existing script.
-  * Place the configuration in `~/.pms/time.conf`. Will not modify existing configuration.
+  * Place the script in `~/.config/pmsg/pmsg`, or upgrade an existing script.
+  * Place the configuration in `~/.config/pmsg/time.conf`. Will not modify existing configuration.
   * Set up bash and zsh, if not already set up.
   * This also includes the `on` and `off` shell functions for turning the prompt messages on or off.
 
-* Edit `~/.pms/time.conf` to your liking and restart your shell.
+* Edit `~/.config/pmsg/time.conf` to your liking and restart your shell.
 
 ### Bash setup
 
@@ -30,7 +30,7 @@ Help you remember stuff during the day, by reminding you directly at the prompt 
 ```
 # Prompt Messages
 on() {
-  export PROMPT_COMMAND="$HOME/.pms/pms"
+  export PROMPT_COMMAND="/home/afr/.config/pmsg/pmsg"
   off() { unset PROMPT_COMMAND; }
 }
 # Enable prompt messages if on the right host and not over ssh
@@ -44,17 +44,6 @@ on() {
 * Add the following to your `~/.config/fish/config.fish`:
 
 ```
-# Prompt Messages
-function on
-  function pms --on-event fish_prompt
-    /home/afr/.config/pms//pms
-  end
-  function off
-    functions -e pms
-  end
-end
-# Enable prompt messages if on the right host and not over ssh
-if [ (hostname) = "work_pc" ]; and not count $SSH_TTY > /dev/null; on; end
 ```
 
 * Change `work_pc` to whatever the hostname of your work pc is.
@@ -66,7 +55,7 @@ if [ (hostname) = "work_pc" ]; and not count $SSH_TTY > /dev/null; on; end
 ```
 # Prompt Messages
 on() {
-  precmd() { $HOME/.pms/pms }
+  precmd() { /home/afr/.config/pmsg/pmsg }
   off() { unset -f precmd }
 }
 # Enable prompt messages if on the right host and not over ssh

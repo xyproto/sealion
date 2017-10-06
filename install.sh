@@ -4,15 +4,15 @@ echo '----------------------------------'
 echo 'Promptmessages installation script'
 echo '----------------------------------'
 
-TARGET_DIR=~/.config/pms
+TARGET_DIR=~/.config/pmsg
 
-# Install ~/.pms/pms
-if [ -x $TARGET_DIR/pms ]; then
+# Install $TARGET_DIR/pmsg
+if [ -x $TARGET_DIR/pmsg ]; then
   # Only upgrade the executable if the files differ
-  diff -q pms $TARGET_DIR/pms 2>&1 1>/dev/null && echo 'pms was already installed' || install -Dm755 pms $TARGET_DIR/pms
+  diff -q pmsg $TARGET_DIR/pmsg 2>&1 1>/dev/null && echo 'pmsg was already installed' || install -Dm755 pmsg $TARGET_DIR/pmsg
 else
-  echo "Installing $TARGET_DIR/pms"
-  install -Dm755 pms $TARGET_DIR/pms
+  echo "Installing $TARGET_DIR/pmsg"
+  install -Dm755 pmsg $TARGET_DIR/pmsg
 fi
 
 # Install $TARGET_DIR/time.conf
@@ -34,7 +34,7 @@ if [ -f ~/.zshrc ]; then
 
 # Prompt Messages
 on() {
-  precmd() { $TARGET_DIR/pms }
+  precmd() { $TARGET_DIR/pmsg }
   off() { unset -f precmd }
 }
 # Enable prompt messages if on the right host and not over ssh
@@ -56,7 +56,7 @@ if [ -f ~/.bashrc ]; then
 
 # Prompt Messages
 on() {
-  export PROMPT_COMMAND="$TARGET_DIR/pms"
+  export PROMPT_COMMAND="$TARGET_DIR/pmsg"
   off() { unset PROMPT_COMMAND; }
 }
 # Enable prompt messages if on the right host and not over ssh
@@ -68,7 +68,7 @@ fi
 # Set up fish, if not already set up
 if [ -f ~/.config/fish/config.fish ]; then
   already=0
-  grep -q -F 'function pms --on-event fish_prompt' ~/.config/fish/config.fish && already=1
+  grep -q -F 'function pmsg --on-event fish_prompt' ~/.config/fish/config.fish && already=1
   if [ "$already" == "1" ]; then
     echo 'fish was already set up'
   else
@@ -77,11 +77,11 @@ if [ -f ~/.config/fish/config.fish ]; then
 
 # Prompt Messages
 function on
-  function pms --on-event fish_prompt
-    $TARGET_DIR/pms
+  function pmsg --on-event fish_prompt
+    $TARGET_DIR/pmsg
   end
   function off
-    functions -e pms
+    functions -e pmsg
   end
 end
 # Enable prompt messages if on the right host and not over ssh
