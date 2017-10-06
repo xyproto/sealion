@@ -1,6 +1,6 @@
 # Promptmessages
 
-Display messages at the ZSH prompt at certain time intervals during the day.
+Display messages at the ZSH or Bash prompt at certain time intervals during the day.
 
 ## Goal
 
@@ -11,32 +11,51 @@ Help you remember stuff during the day, by reminding you directly at the prompt 
 ### Requirements
 
 * Python 3
-* zsh
+* zsh or bash
 
-### As a user
+### User installation
 
-* Install the executable and configuration file to `~/.pms`:
+* Run `./install.sh`, which will do the following:
+  * Place the script in `~/.pms/pms`, or upgrade an existing script.
+  * Place the configuration in `~/.pms/time.conf`. Will not modify existing configuration.
+  * Set up bash and zsh, if not already set up.
+  * This also includes the `on` and `off` shell functions for turning the prompt messages on or off.
+
+* Edit `~/.pms/time.conf` to your liking and restart your shell.
+
+### Bash setup
+
+* Add the following to your `~/.bashrc`:
 
 ```
-install -Dm755 pms ~/.pms/pms`
-install -Dm755 time.example.conf ~/.pms/time.conf
-```
-
-* Edit `~/.pms/time.conf` to your liking.
-
-* Add the following to your `~/.zshrc`:
-
-```
-if [ $HOST = work_pc ] && [ ! -n "$SSH_TTY" ]; then
-  off() { unset -f precmd }
-  on() { precmd() { $HOME/.pms/pms } }
-  on
-fi
+# Prompt Messages
+on() {
+  export PROMPT_COMMAND="$HOME/.pms/pms"
+  off() { unset PROMPT_COMMAND; }
+}
+# Enable prompt messages if on the right host and not over ssh
+[ $HOSTNAME = "work_pc" ] && [ ! -n "$SSH_TTY" ] && on
 ```
 
 * Change `work_pc` to whatever the hostname of your work pc is.
 
-* Check that `~/.pms/pms` outputs messages as expected.
+### Zsh setup
+
+* Add the following to your `~/.zshrc`:
+
+```
+# Prompt Messages
+on() {
+  precmd() { $HOME/.pms/pms }
+  off() { unset -f precmd }
+}
+# Enable prompt messages if on the right host and not over ssh
+[ "$HOST" = "work_pc" ] && [ ! -n "$SSH_TTY" ] && on
+```
+
+* Change `work_pc` to whatever the hostname of your work pc is.
+
+### Test that it works
 
 * Typing `off` or `on` should disable or enable the prompt notification.
 
