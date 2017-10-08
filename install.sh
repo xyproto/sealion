@@ -8,7 +8,7 @@ INSTALL_BINARY=1
 
 if [ "$1" == "system" ]; then
   SOURCE_DIR=/usr/share/pmsg
-  PREFIX=
+  PREFIX=/
   BIN_DIR=usr/bin
   INSTALL_BINARY=0
 fi
