@@ -62,7 +62,7 @@ if [ -f ~/.zshrc ]; then
 
 # Prompt Messages
 on() {
-  precmd() { $BIN_DIR/pmsg }
+  precmd() { $PREFIX/$BIN_DIR/pmsg }
   off() { unset -f precmd }
 }
 # Enable prompt messages if on the right host and not over ssh
@@ -84,7 +84,7 @@ if [ -f ~/.bashrc ]; then
 
 # Prompt Messages
 on() {
-  export PROMPT_COMMAND="$BIN_DIR/pmsg"
+  export PROMPT_COMMAND="$PREFIX/$BIN_DIR/pmsg"
   off() { unset PROMPT_COMMAND; }
 }
 # Enable prompt messages if on the right host and not over ssh
@@ -106,7 +106,7 @@ if [ -d ~/.config/fish ]; then
 # Prompt Messages
 function on
   function pmsg --on-event fish_prompt
-    $BIN_DIR/pmsg
+    $PREFIX/$BIN_DIR/pmsg
   end
   function off
     functions -e pmsg
