@@ -1,16 +1,23 @@
 #!/bin/sh
 
+SOURCE_DIR=.
+USER_CONF_DIR=.config/pmsg
+PREFIX="$HOME"
+BIN_DIR=.config/pmsg
+INSTALL_BINARY=1
+
+if [ "$1" == "system" ]; then
+  SOURCE_DIR=/usr/share/pmsg
+  PREFIX=
+  BIN_DIR=usr/bin
+  INSTALL_BINARY=0
+fi
+
 cat << dog
 
 ----=[ Prompt Messages user setup script ]=----
 
 dog
-
-SOURCE_DIR=.
-USER_CONF_DIR=.config/pmsg
-PREFIX=$HOME
-#BIN_DIR=usr/bin
-BIN_DIR=.config/pmsg
 
 # msg outputs a topic + green message, with a final newline
 msg() {
@@ -23,13 +30,15 @@ msg() {
   fi
 }
 
-# Install $PREFIX/$BIN_DIR/pmsg, but only if $BIN_DIR is in /home
-test "${PWD##/home/}" != "${PWD}" && if [ -x $PREFIX/$BIN_DIR/pmsg ]; then
-  # Only upgrade the executable if the files differ
-  diff -q "$SOURCE_DIR/pmsg" "$PREFIX/$BIN_DIR/pmsg" 2>&1 1>/dev/null && msg pmsg 'Already in place' || (msg pmsg "Installing to $PREFIX/$BIN_DIR/pmsg"; install -Dm755 "$SOURCE_DIR/pmsg" "$PREFIX/$BIN_DIR/pmsg")
-else
-  msg pmsg "Installing to $PREFIX/$BIN_DIR/pmsg"
-  install -Dm755 "$SOURCE_DIR/pmsg" "$PREFIX/$BIN_DIR/pmsg"
+# Install $PREFIX/$BIN_DIR/pmsg, if INSTALL_BINARY=1
+if [ "$INSTALL_BINARY" == "1" ]; then
+  if [ -x $PREFIX/$BIN_DIR/pmsg ]; then
+    # Only upgrade the executable if the files differ
+    diff -q "$SOURCE_DIR/pmsg" "$PREFIX/$BIN_DIR/pmsg" 2>&1 1>/dev/null && msg pmsg 'Already in place' || (msg pmsg "Installing to $PREFIX/$BIN_DIR/pmsg"; install -Dm755 "$SOURCE_DIR/pmsg" "$PREFIX/$BIN_DIR/pmsg")
+  else
+    msg pmsg "Installing to $PREFIX/$BIN_DIR/pmsg"
+    install -Dm755 "$SOURCE_DIR/pmsg" "$PREFIX/$BIN_DIR/pmsg"
+  fi
 fi
 
 # Install to ~/$USER_CONF_DIR/time.conf
