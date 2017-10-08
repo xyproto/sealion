@@ -7,7 +7,10 @@ cat << dog
 dog
 
 SOURCE_DIR=.
-TARGET_DIR=~/.config/pmsg
+USER_CONF_DIR=.config/pmsg
+PREFIX=
+#BIN_DIR=usr/bin
+BIN_DIR=$HOME/.config/pmsg
 
 # msg outputs a topic + green message, with a final newline
 msg() {
@@ -20,19 +23,19 @@ msg() {
   fi
 }
 
-# Install $TARGET_DIR/pmsg
-if [ -x $TARGET_DIR/pmsg ]; then
+# Install $PREFIX/$BIN_DIR/pmsg
+if [ -x $PREFIX/$BIN_DIR/pmsg ]; then
   # Only upgrade the executable if the files differ
-  diff -q "$SOURCE_DIR/pmsg" "$TARGET_DIR/pmsg" 2>&1 1>/dev/null && msg pmsg 'Already in place' || (msg pmsg "Installing to $TARGET_DIR/pmsg"; install -Dm755 "$SOURCE_DIR/pmsg" "$TARGET_DIR/pmsg")
+  diff -q "$SOURCE_DIR/pmsg" "$PREFIX/$BIN_DIR/pmsg" 2>&1 1>/dev/null && msg pmsg 'Already in place' || (msg pmsg "Installing to $PREFIX/$BIN_DIR/pmsg"; install -Dm755 "$SOURCE_DIR/pmsg" "$PREFIX/$BIN_DIR/pmsg")
 else
-  msg pmsg "Installing to $TARGET_DIR/pmsg"
-  install -Dm755 "$SOURCE_DIR/pmsg" "$TARGET_DIR/pmsg"
+  msg pmsg "Installing to $PREFIX/BIN_DIR/pmsg"
+  install -Dm755 "$SOURCE_DIR/pmsg" "$PREFIX/$BIN_DIR/pmsg"
 fi
 
-# Install $TARGET_DIR/time.conf
-if [ ! -f $TARGET_DIR/time.conf ]; then
-  msg 'time.conf' "Installing to $TARGET_DIR/time.conf"
-  install -Dm644 "$SOURCE_DIR/time.example.conf" "$TARGET_DIR/time.conf"
+# Install to ~/$USER_CONF_DIR/time.conf
+if [ ! -f $HOME/$USER_CONF_DIR/time.conf ]; then
+  msg 'time.conf' "Installing to ~/$USER_CONF_DIR/time.conf"
+  install -Dm644 "$SOURCE_DIR/time.example.conf" "$HOME/$USER_CONF_DIR/time.conf"
 else
   msg 'time.conf' "Already in place"
 fi
@@ -50,7 +53,7 @@ if [ -f ~/.zshrc ]; then
 
 # Prompt Messages
 on() {
-  precmd() { $TARGET_DIR/pmsg }
+  precmd() { $BIN_DIR/pmsg }
   off() { unset -f precmd }
 }
 # Enable prompt messages if on the right host and not over ssh
@@ -72,7 +75,7 @@ if [ -f ~/.bashrc ]; then
 
 # Prompt Messages
 on() {
-  export PROMPT_COMMAND="$TARGET_DIR/pmsg"
+  export PROMPT_COMMAND="$BIN_DIR/pmsg"
   off() { unset PROMPT_COMMAND; }
 }
 # Enable prompt messages if on the right host and not over ssh
@@ -82,9 +85,9 @@ EOF
 fi
 
 # Set up fish, if not already set up
-if [ -f ~/.config/fish/config.fish ]; then
+if [ -d ~/.config/fish ]; then
   already=0
-  grep -q -F 'function pmsg --on-event fish_prompt' ~/.config/fish/config.fish && already=1
+  grep -q -F 'function pmsg --on-event fish_prompt' ~/.config/fish/config.fish 2>/dev/null && already=1
   if [ "$already" == "1" ]; then
     msg fish 'Already set up'
   else
@@ -94,7 +97,7 @@ if [ -f ~/.config/fish/config.fish ]; then
 # Prompt Messages
 function on
   function pmsg --on-event fish_prompt
-    $TARGET_DIR/pmsg
+    $BIN_DIR/pmsg
   end
   function off
     functions -e pmsg
@@ -106,4 +109,4 @@ EOF
   fi
 fi
 
-echo -e "\nPlease edit $TARGET_DIR/time.conf and restart your shell.\n"
+echo -e "\nPlease edit ~/$USER_CONF_DIR/time.conf and restart your shell.\n"

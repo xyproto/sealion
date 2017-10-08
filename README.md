@@ -30,7 +30,7 @@ Help you remember stuff during the day, by reminding you directly at the prompt 
 ```
 # Prompt Messages
 on() {
-  export PROMPT_COMMAND="/home/afr/.config/pmsg/pmsg"
+  export PROMPT_COMMAND="/usr/bin/pmsg"
   off() { unset PROMPT_COMMAND; }
 }
 # Enable prompt messages if on the right host and not over ssh
@@ -44,6 +44,17 @@ on() {
 * Add the following to your `~/.config/fish/config.fish`:
 
 ```
+# Prompt Messages
+function on
+  function pmsg --on-event fish_prompt
+    /usr/bin/pmsg
+  end
+  function off
+    functions -e pmsg
+  end
+end
+# Enable prompt messages if on the right host and not over ssh
+if [ (hostname) = "work_pc" ]; and not count $SSH_TTY > /dev/null; on; end
 ```
 
 * Change `work_pc` to whatever the hostname of your work pc is.
@@ -55,7 +66,7 @@ on() {
 ```
 # Prompt Messages
 on() {
-  precmd() { /home/afr/.config/pmsg/pmsg }
+  precmd() { /usr/bin/pmsg }
   off() { unset -f precmd }
 }
 # Enable prompt messages if on the right host and not over ssh
@@ -75,4 +86,4 @@ on() {
 
 ## General Info
 
-* Version: 0.1
+* Version: 0.2
