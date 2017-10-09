@@ -1,4 +1,4 @@
-# Prompt Messages
+# Interval Prompt Messages
 
 Display messages right before the prompt at certain time intervals during the day.
 
