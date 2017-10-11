@@ -13,6 +13,10 @@ Help you remember stuff during the day, by reminding you directly at the prompt 
 * Python 3
 * bash, fish or zsh
 
+### Asciicast
+
+[![asciicast](https://asciinema.org/a/kdSeWSAxNzgRK8tKlrLT074uk.png)](https://asciinema.org/a/kdSeWSAxNzgRK8tKlrLT074uk)
+
 ### User installation
 
 * Run `./install.sh`, which will do the following:
