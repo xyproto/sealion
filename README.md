@@ -27,6 +27,10 @@ Help you remember stuff during the day, by reminding you directly at the prompt 
 
 * Edit `~/.config/pmsg/time.conf` to your liking and restart your shell.
 
+# Manual setup
+
+Just running the install script should be enough to set up `pmsg`. If you would rather set things up manually, here are the suggested configuration snippets for your shell:
+
 ### Bash setup
 
 * Add the following to your `~/.bashrc`:
@@ -37,11 +41,12 @@ on() {
   export PROMPT_COMMAND="/usr/bin/pmsg"
   off() { unset PROMPT_COMMAND; }
 }
+
 # Enable prompt messages if on the right host and not over ssh
 [ $HOSTNAME = "work_pc" ] && [ ! -n "$SSH_TTY" ] && on
 ```
 
-* Change `work_pc` to whatever the hostname of your work pc is.
+* NOTE: Change `work_pc` to whatever the hostname of your work pc is.
 
 ### Fish setup
 
@@ -57,11 +62,12 @@ function on
     functions -e pmsg
   end
 end
+
 # Enable prompt messages if on the right host and not over ssh
 if [ (hostname) = "work_pc" ]; and not count $SSH_TTY > /dev/null; on; end
 ```
 
-* Change `work_pc` to whatever the hostname of your work pc is.
+* NOTE: Change `work_pc` to whatever the hostname of your work pc is.
 
 ### Zsh setup
 
@@ -73,11 +79,12 @@ on() {
   precmd() { /usr/bin/pmsg }
   off() { unset -f precmd }
 }
+
 # Enable prompt messages if on the right host and not over ssh
 [ "$HOST" = "work_pc" ] && [ ! -n "$SSH_TTY" ] && on
 ```
 
-* Change `work_pc` to whatever the hostname of your work pc is.
+* NOTE: Change `work_pc` to whatever the hostname of your work pc is.
 
 ### Test that it works
 
