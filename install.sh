@@ -66,7 +66,7 @@ on() {
   off() { unset -f precmd }
 }
 # Enable prompt messages if on the right host and not over ssh
-[ "\$HOST" = "$HOSTNAME" ] && [ ! -n "\$SSH_TTY" ] && on
+[ "\$HOST" = "$HOSTNAME" ] && [ ! -n "\$SSH_TTY" ] && on || true
 EOF
   fi
 fi
@@ -88,7 +88,7 @@ on() {
   off() { unset PROMPT_COMMAND; }
 }
 # Enable prompt messages if on the right host and not over ssh
-[ \$HOSTNAME = "$HOSTNAME" ] && [ ! -n "\$SSH_TTY" ] && on
+[ \$HOSTNAME = "$HOSTNAME" ] && [ ! -n "\$SSH_TTY" ] && on || true
 EOF
   fi
 fi

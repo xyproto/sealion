@@ -43,7 +43,7 @@ on() {
 }
 
 # Enable prompt messages if on the right host and not over ssh
-[ $HOSTNAME = "work_pc" ] && [ ! -n "$SSH_TTY" ] && on
+[ $HOSTNAME = "work_pc" ] && [ ! -n "$SSH_TTY" ] && on || true
 ```
 
 * NOTE: Change `work_pc` to whatever the hostname of your work pc is.
@@ -81,7 +81,7 @@ on() {
 }
 
 # Enable prompt messages if on the right host and not over ssh
-[ "$HOST" = "work_pc" ] && [ ! -n "$SSH_TTY" ] && on
+[ "$HOST" = "work_pc" ] && [ ! -n "$SSH_TTY" ] && on || true
 ```
 
 * NOTE: Change `work_pc` to whatever the hostname of your work pc is.
