@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# promptmessages 0.5
+# promptmessages 0.6
 #
 # Alexander F Rødseth <xyproto@archlinux.org>
 # 2017-10-05
 # 2017-10-08
 # 2017-10-12
 # 2017-10-28
+# 2017-11-01
 #
 # MIT licensed
 #
@@ -53,14 +54,14 @@ def main():
     lines = []
     for time_conf in time_confs:
         try:
-            lines = open(time_conf).read().split("\n")[:-1]
+            lines = open(time_conf, encoding="utf-8").read().split("\n")[:-1]
         except FileNotFoundError:
             continue
         except PermissionError as e:
-            print(e)
+            print(time_conf + ":", e)
             sys.exit(1)
         except UnicodeDecodeError as e:
-            print(e)
+            print(time_conf + ":", e)
             sys.exit(1)
     if not lines:
         print("ERROR: Found no configuration for pmsg.")
