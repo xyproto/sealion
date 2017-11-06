@@ -1,0 +1,2 @@
+- colors
+- allowing "lunch in 2 minutes" messages with a syntax like this: "lunch in $(minto 11:20) minutes" or "lunch in %11:20% minutes" or "lunch in {{11:20}} minutes"
