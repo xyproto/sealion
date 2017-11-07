@@ -94,7 +94,9 @@ on() {
 
 * `time.conf` needs to follow the existing format strictly (using `:` and `-` at the appropriate places) or there will be errors.
 * Comments in `time.conf` are allowed, as long as they are single-line comments starting with `#`.
+* If a description in `time.conf` contains `%m`, it will be replaced with the number of minutes left when outputting the message.
+* If the `TERM` environment variable contains `color`, the output message will be in color.
 
 ## General Info
 
-* Version: 0.6
+* Version: 0.7
