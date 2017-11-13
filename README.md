@@ -97,6 +97,16 @@ on() {
 * If a description in `time.conf` contains `%m`, it will be replaced with the number of minutes left when outputting the message.
 * If the `TERM` environment variable contains `color`, the output message will be in color.
 
+## For watching the notifications continuously
+
+Simple case:
+
+    watch pmsg
+
+For watching the notifications continuously in a terminal window (updated every 5 seconds, no title, highlighted diff):
+
+    watch --color --differences --no-title --interval 5 pmsg
+
 ## General Info
 
 * Version: 0.7
