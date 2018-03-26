@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# promptmessages 0.7
+# promptmessages 0.8
 #
 # Alexander F Rødseth <xyproto@archlinux.org>
 # 2017-10-05
@@ -10,6 +10,7 @@
 # 2017-10-28
 # 2017-11-01
 # 2017-11-07
+# 2018-03-26
 #
 # MIT licensed
 #
@@ -45,15 +46,14 @@ class Event:
         given_minute = hour * 60 + minute
         start_minute = self.start_hour * 60 + self.start_minute
         end_minute = self.end_hour * 60 + self.end_minute
-        return given_minute >= start_minute and given_minute <= end_minute
+        return (given_minute >= start_minute) and (given_minute <= end_minute)
 
-    def output_desc(self):
+    def output_desc(self, now=datetime.datetime.now()):
         msg = self.desc
         if "%m" in self.desc:
-            now = datetime.datetime.utcnow()
             end = datetime.datetime(year=now.year, month=now.month, day=now.day,
                                     hour=self.end_hour, minute=self.end_minute)
-            minutes_left = ((self.end_hour - now.hour) - 1) * 60 + (self.end_minute - now.minute)
+            minutes_left = (self.end_hour - now.hour) * 60 + (self.end_minute - now.minute)
             msg = self.desc.replace("%m", str(minutes_left))
         if "color" in os.getenv("TERM"):
             print('\033[95m{}\033[0m'.format(msg))
@@ -93,7 +93,7 @@ def main():
     now = datetime.datetime.now()
     for event in events:
         if event.at(now.hour, now.minute):
-            event.output_desc()
+            event.output_desc(now)
 
 
 if __name__ == "__main__":
