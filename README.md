@@ -109,4 +109,4 @@ For watching the notifications continuously in a terminal window (updated every 
 
 ## General Info
 
-* Version: 0.7
+* Version: 0.8
