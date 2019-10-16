@@ -31,7 +31,7 @@ Just running the install script should be enough to set up `promptmessage`. If y
 
 * Add the following to your `~/.bashrc`:
 
-```
+```bash
 # Prompt Messages
 on() {
   export PROMPT_COMMAND="/usr/bin/promptmessage"
@@ -48,7 +48,7 @@ on() {
 
 * Add the following to your `~/.config/fish/config.fish`:
 
-```
+```fish
 # Prompt Messages
 function on
   function promptmessage --on-event fish_prompt
@@ -69,7 +69,7 @@ if [ (hostname) = "work_pc" ]; and not count $SSH_TTY > /dev/null; on; end
 
 * Add the following to your `~/.zshrc`:
 
-```
+```zsh
 # Prompt Messages
 on() {
   precmd() { /usr/bin/promptmessage }
@@ -97,11 +97,15 @@ on() {
 
 Simple case:
 
-    watch promptmessage
+```sh
+watch promptmessage
+```
 
 For watching the notifications continuously in a terminal window (updated every 5 seconds, no title, highlighted diff):
 
-    watch --color --differences --no-title --interval 5 promptmessage
+```sh
+watch --color --differences --no-title --interval 5 promptmessage
+```
 
 ## General Info
 
