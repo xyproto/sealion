@@ -11,11 +11,7 @@ Help you remember stuff during the day, by reminding you directly at the prompt 
 ### Requirements
 
 * Python 3
-* bash, fish or zsh
-
-### Asciicast
-
-[![asciicast](https://asciinema.org/a/kdSeWSAxNzgRK8tKlrLT074uk.png)](https://asciinema.org/a/kdSeWSAxNzgRK8tKlrLT074uk)
+* `bash`, `fish` or `zsh`
 
 ### User installation
 
@@ -27,7 +23,7 @@ Help you remember stuff during the day, by reminding you directly at the prompt 
 
 * Edit `~/.config/promptmessage/time.conf` to your liking and restart your shell.
 
-# Manual setup
+## Manual setup
 
 Just running the install script should be enough to set up `promptmessage`. If you would rather set things up manually, here are the suggested configuration snippets for your shell:
 
