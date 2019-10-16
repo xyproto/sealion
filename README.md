@@ -20,16 +20,16 @@ Help you remember stuff during the day, by reminding you directly at the prompt 
 ### User installation
 
 * Run `./install.sh`, which will do the following:
-  * Place the script in `~/.config/pmsg/pmsg`, or upgrade an existing script.
-  * Place the configuration in `~/.config/pmsg/time.conf`. Will not modify existing configuration.
+  * Place the script in `~/.config/promptmessage/promptmessage`, or upgrade an existing script.
+  * Place the configuration in `~/.config/promptmessage/time.conf`. Will not modify existing configuration.
   * Set up bash and zsh, if not already set up.
   * This also includes the `on` and `off` shell functions for turning the prompt messages on or off.
 
-* Edit `~/.config/pmsg/time.conf` to your liking and restart your shell.
+* Edit `~/.config/promptmessage/time.conf` to your liking and restart your shell.
 
 # Manual setup
 
-Just running the install script should be enough to set up `pmsg`. If you would rather set things up manually, here are the suggested configuration snippets for your shell:
+Just running the install script should be enough to set up `promptmessage`. If you would rather set things up manually, here are the suggested configuration snippets for your shell:
 
 ### Bash setup
 
@@ -38,7 +38,7 @@ Just running the install script should be enough to set up `pmsg`. If you would 
 ```
 # Prompt Messages
 on() {
-  export PROMPT_COMMAND="/usr/bin/pmsg"
+  export PROMPT_COMMAND="/usr/bin/promptmessage"
   off() { unset PROMPT_COMMAND; }
 }
 
@@ -55,11 +55,11 @@ on() {
 ```
 # Prompt Messages
 function on
-  function pmsg --on-event fish_prompt
-    /usr/bin/pmsg
+  function promptmessage --on-event fish_prompt
+    /usr/bin/promptmessage
   end
   function off
-    functions -e pmsg
+    functions -e promptmessage
   end
 end
 
@@ -76,7 +76,7 @@ if [ (hostname) = "work_pc" ]; and not count $SSH_TTY > /dev/null; on; end
 ```
 # Prompt Messages
 on() {
-  precmd() { /usr/bin/pmsg }
+  precmd() { /usr/bin/promptmessage }
   off() { unset -f precmd }
 }
 
@@ -101,11 +101,11 @@ on() {
 
 Simple case:
 
-    watch pmsg
+    watch promptmessage
 
 For watching the notifications continuously in a terminal window (updated every 5 seconds, no title, highlighted diff):
 
-    watch --color --differences --no-title --interval 5 pmsg
+    watch --color --differences --no-title --interval 5 promptmessage
 
 ## General Info
 

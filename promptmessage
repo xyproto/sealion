@@ -22,11 +22,11 @@ import sys
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 time_confs = [
-    os.path.expanduser("~/.config/pmsg/time.conf"),
-    os.path.expanduser("~/.pmsg/time.conf"),
-    os.path.expanduser("~/.pmsgrc"),
-    "/etc/pmsg/time.conf",
-    "/etc/pmsgrc",
+    os.path.expanduser("~/.config/promptmessage/time.conf"),
+    os.path.expanduser("~/.promptmessage/time.conf"),
+    os.path.expanduser("~/.promptmessagerc"),
+    "/etc/promptmessage/time.conf",
+    "/etc/promptmessagerc",
 ]
 
 
@@ -78,7 +78,7 @@ def main():
             print(time_conf + ":", e)
             sys.exit(1)
     if not lines:
-        print("ERROR: Found no configuration for pmsg.")
+        print("ERROR: Found no configuration for promptmessage.")
         sys.exit(1)
     for line in lines:
         if line.strip().startswith("#"):

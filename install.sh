@@ -1,13 +1,13 @@
 #!/bin/sh
 
 SOURCE_DIR=.
-USER_CONF_DIR=.config/pmsg
+USER_CONF_DIR=.config/promptmessage
 PREFIX="$HOME/"
-BIN_DIR=.config/pmsg
+BIN_DIR=.config/promptmessage
 INSTALL_BINARY=1
 
 if [ "$1" == "system" ]; then
-  SOURCE_DIR=/usr/share/pmsg
+  SOURCE_DIR=/usr/share/promptmessage
   PREFIX=/
   BIN_DIR=usr/bin
   INSTALL_BINARY=0
@@ -30,14 +30,14 @@ msg() {
   fi
 }
 
-# Install $PREFIX$BIN_DIR/pmsg, if INSTALL_BINARY=1
+# Install $PREFIX$BIN_DIR/promptmessage, if INSTALL_BINARY=1
 if [ "$INSTALL_BINARY" == "1" ]; then
-  if [ -x $PREFIX$BIN_DIR/pmsg ]; then
+  if [ -x $PREFIX$BIN_DIR/promptmessage ]; then
     # Only upgrade the executable if the files differ
-    diff -q "$SOURCE_DIR/pmsg" "$PREFIX$BIN_DIR/pmsg" 2>&1 1>/dev/null && msg pmsg 'Already in place' || (msg pmsg "Installing to $PREFIX$BIN_DIR/pmsg"; install -Dm755 "$SOURCE_DIR/pmsg" "$PREFIX$BIN_DIR/pmsg")
+    diff -q "$SOURCE_DIR/promptmessage" "$PREFIX$BIN_DIR/promptmessage" 2>&1 1>/dev/null && msg promptmessage 'Already in place' || (msg promptmessage "Installing to $PREFIX$BIN_DIR/promptmessage"; install -Dm755 "$SOURCE_DIR/promptmessage" "$PREFIX$BIN_DIR/promptmessage")
   else
-    msg pmsg "Installing to $PREFIX$BIN_DIR/pmsg"
-    install -Dm755 "$SOURCE_DIR/pmsg" "$PREFIX$BIN_DIR/pmsg"
+    msg promptmessage "Installing to $PREFIX$BIN_DIR/promptmessage"
+    install -Dm755 "$SOURCE_DIR/promptmessage" "$PREFIX$BIN_DIR/promptmessage"
   fi
 fi
 
@@ -62,7 +62,7 @@ if [ -f ~/.zshrc ]; then
 
 # Prompt Messages
 on() {
-  precmd() { $PREFIX$BIN_DIR/pmsg }
+  precmd() { $PREFIX$BIN_DIR/promptmessage }
   off() { unset -f precmd }
 }
 # Enable prompt messages if on the right host and not over ssh
@@ -84,7 +84,7 @@ if [ -f ~/.bashrc ]; then
 
 # Prompt Messages
 on() {
-  export PROMPT_COMMAND="$PREFIX$BIN_DIR/pmsg"
+  export PROMPT_COMMAND="$PREFIX$BIN_DIR/promptmessage"
   off() { unset PROMPT_COMMAND; }
 }
 # Enable prompt messages if on the right host and not over ssh
@@ -96,7 +96,7 @@ fi
 # Set up fish, if not already set up
 if [ -d ~/.config/fish ]; then
   already=0
-  grep -q -F 'function pmsg --on-event fish_prompt' ~/.config/fish/config.fish 2>/dev/null && already=1
+  grep -q -F 'function promptmessage --on-event fish_prompt' ~/.config/fish/config.fish 2>/dev/null && already=1
   if [ "$already" == "1" ]; then
     msg fish 'Already set up'
   else
@@ -105,11 +105,11 @@ if [ -d ~/.config/fish ]; then
 
 # Prompt Messages
 function on
-  function pmsg --on-event fish_prompt
-    $PREFIX$BIN_DIR/pmsg
+  function promptmessage --on-event fish_prompt
+    $PREFIX$BIN_DIR/promptmessage
   end
   function off
-    functions -e pmsg
+    functions -e promptmessage
   end
 end
 # Enable prompt messages if on the right host and not over ssh
