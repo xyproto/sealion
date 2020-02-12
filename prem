@@ -41,7 +41,7 @@ class Event:
                                     hour=self.end_hour, minute=self.end_minute)
             minutes_left = (self.end_hour - now.hour) * 60 + (self.end_minute - now.minute)
             msg = self.desc.replace("%m", str(minutes_left))
-        if "color" in os.getenv("TERM"):
+        if "color" in os.getenv("TERM") and not os.getenv("NO_COLOR"):
             print('\033[95m{}\033[0m'.format(msg))
         else:
             print(msg)
