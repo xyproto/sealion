@@ -1,23 +1,7 @@
 #!/bin/sh
 
-SOURCE_DIR=.
-USER_CONF_DIR=.config/prem
-PREFIX="$HOME/"
-BIN_DIR=.config/prem
-INSTALL_BINARY=1
-
-if [ "$1" == "system" ]; then
-  SOURCE_DIR=/usr/share/prem
-  PREFIX=/
-  BIN_DIR=usr/bin
-  INSTALL_BINARY=0
-fi
-
-cat << dog
-
-----=[ Prompt Reminder user setup script ]=----
-
-dog
+CONF_DIR="$HOME/.config/prem"
+SYS_DIR="/usr/share/prem"
 
 # msg outputs a topic + green message, with a final newline
 msg() {
@@ -30,92 +14,103 @@ msg() {
   fi
 }
 
-# Install $PREFIX$BIN_DIR/prem, if INSTALL_BINARY=1
-if [ "$INSTALL_BINARY" == "1" ]; then
-  if [ -x $PREFIX$BIN_DIR/prem ]; then
-    # Only upgrade the executable if the files differ
-    diff -q "$SOURCE_DIR/prem" "$PREFIX$BIN_DIR/prem" 2>&1 1>/dev/null && msg prem 'Already in place' || (msg prem "Installing to $PREFIX$BIN_DIR/prem"; install -Dm755 "$SOURCE_DIR/prem" "$PREFIX$BIN_DIR/prem")
-  else
-    msg prem "Installing to $PREFIX$BIN_DIR/prem"
-    install -Dm755 "$SOURCE_DIR/prem" "$PREFIX$BIN_DIR/prem"
+setup_zsh() {
+  # Set up zsh, if not already set up
+  if [ -f ~/.zshrc ]; then
+    already=0
+    grep -q -F 'precmd() {' ~/.zshenv && already=1
+    grep -q -F 'precmd() {' ~/.zshrc && already=1
+    if [ "$already" == "1" ]; then
+      msg zsh 'Already set up'
+    else
+      msg zsh 'Setting up'
+      cat << EOF >> ~/.zshrc
+
+  # Prompt Reminder
+  on() {
+    precmd() { /usr/bin/prem }
+    off() { unset -f precmd }
+  }
+
+  # Enable prompt messages if on the right host and not over ssh
+  [ "\$HOST" = "$HOSTNAME" ] && [ ! -n "\$SSH_TTY" ] && on || true
+EOF
+    fi
   fi
-fi
-
-# Install to ~/$USER_CONF_DIR/time.conf
-if [ ! -f $HOME/$USER_CONF_DIR/time.conf ]; then
-  msg 'time.conf' "Installing to ~/$USER_CONF_DIR/time.conf"
-  install -Dm644 "$SOURCE_DIR/time.example.conf" "$HOME/$USER_CONF_DIR/time.conf"
-else
-  msg 'time.conf' "Already in place"
-fi
-
-# Set up zsh, if not already set up
-if [ -f ~/.zshrc ]; then
-  already=0
-  grep -q -F 'precmd() {' ~/.zshenv && already=1
-  grep -q -F 'precmd() {' ~/.zshrc && already=1
-  if [ "$already" == "1" ]; then
-    msg zsh 'Already set up'
-  else
-    msg zsh 'Setting up'
-    cat << EOF >> ~/.zshrc
-
-# Prompt Reminder
-on() {
-  precmd() { $PREFIX$BIN_DIR/prem }
-  off() { unset -f precmd }
 }
-# Enable prompt messages if on the right host and not over ssh
-[ "\$HOST" = "$HOSTNAME" ] && [ ! -n "\$SSH_TTY" ] && on || true
+
+setup_bash() {
+  # Set up bash, if not already set up
+  if [ -f ~/.bashrc ]; then
+    already=0
+    grep -q -F PROMPT_COMMAND= ~/.bash_profile && already=1
+    grep -q -F PROMPT_COMMAND= ~/.bashrc && already=1
+    if [ "$already" == "1" ]; then
+      msg bash 'Already set up'
+    else
+      msg bash 'Setting up'
+      cat << EOF >> ~/.bashrc
+
+  # Prompt Reminder
+  on() {
+    export PROMPT_COMMAND="/usr/bin/prem"
+    off() { unset PROMPT_COMMAND; }
+  }
+
+  # Enable prompt messages if on the right host and not over ssh
+  [ \$HOSTNAME = "$HOSTNAME" ] && [ ! -n "\$SSH_TTY" ] && on || true
 EOF
+    fi
   fi
-fi
-
-# Set up bash, if not already set up
-if [ -f ~/.bashrc ]; then
-  already=0
-  grep -q -F PROMPT_COMMAND= ~/.bash_profile && already=1
-  grep -q -F PROMPT_COMMAND= ~/.bashrc && already=1
-  if [ "$already" == "1" ]; then
-    msg bash 'Already set up'
-  else
-    msg bash 'Setting up'
-    cat << EOF >> ~/.bashrc
-
-# Prompt Reminder
-on() {
-  export PROMPT_COMMAND="$PREFIX$BIN_DIR/prem"
-  off() { unset PROMPT_COMMAND; }
 }
-# Enable prompt messages if on the right host and not over ssh
-[ \$HOSTNAME = "$HOSTNAME" ] && [ ! -n "\$SSH_TTY" ] && on || true
-EOF
-  fi
-fi
 
-# Set up fish, if not already set up
-if [ -d ~/.config/fish ]; then
-  already=0
-  grep -q -F 'function prem --on-event fish_prompt' ~/.config/fish/config.fish 2>/dev/null && already=1
-  if [ "$already" == "1" ]; then
-    msg fish 'Already set up'
+setup_fish() {
+  # Set up fish, if not already set up
+  if [ -d ~/.config/fish ]; then
+    already=0
+    grep -q -F 'function prem --on-event fish_prompt' ~/.config/fish/config.fish 2>/dev/null && already=1
+    if [ "$already" == "1" ]; then
+      msg fish 'Already set up'
+    else
+      msg fish 'Setting up'
+      cat << EOF >> ~/.config/fish/config.fish
+
+  # Prompt Reminder
+  function on
+    function prem --on-event fish_prompt
+      /usr/bin/prem
+    end
+    function off
+      functions -e prem
+    end
+  end
+
+  # Enable prompt messages if on the right host and not over ssh
+  if [ (hostname) = "$HOSTNAME" ]; and not count \$SSH_TTY > /dev/null; on; end
+EOF
+    fi
+  fi
+}
+
+main() {
+  echo
+  echo '----=[ Prompt Reminder user setup ]=----'
+  echo
+
+  # Install default config to ~/$CONF_DIR/time.conf
+  if [ ! -f "$CONF_DIR/time.conf" ]; then
+    msg 'time.conf' "Installing to $CONF_DIR/time.conf"
+    install -Dm644 "$SYS_DIR/time.example.conf" "$CONF_DIR/time.conf"
   else
-    msg fish 'Setting up'
-    cat << EOF >> ~/.config/fish/config.fish
-
-# Prompt Reminder
-function on
-  function prem --on-event fish_prompt
-    $PREFIX$BIN_DIR/prem
-  end
-  function off
-    functions -e prem
-  end
-end
-# Enable prompt messages if on the right host and not over ssh
-if [ (hostname) = "$HOSTNAME" ]; and not count \$SSH_TTY > /dev/null; on; end
-EOF
+    msg 'time.conf' "Already in place"
   fi
-fi
 
-echo -e "\nPlease edit ~/$USER_CONF_DIR/time.conf and restart your shell.\n"
+  # Setup shells
+  setup_zsh
+  setup_fish
+  setup_bash
+  echo -e "\nPlease edit $CONF_DIR/time.conf and restart your shell.\n"
+  echo DONE
+}
+
+main
