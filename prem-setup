@@ -9,7 +9,7 @@ msg() {
   shift
   if [ ! -z "$*" ]; then
     printf "%b" "* \e[1;37m[\e[0m\e[1;34m$topic\e[0m\e[1;37m]"
-    printf ' %.0s' $(seq ${#topic} 25)
+    printf ' %.0s' $(seq ${#topic} 10)
     printf "%b\n" "\e[0;32m$*\e[0m"
   fi
 }
@@ -93,10 +93,6 @@ EOF
 }
 
 main() {
-  echo
-  echo '----=[ Prompt Reminder user setup ]=----'
-  echo
-
   # Install default config to ~/$CONF_DIR/time.conf
   if [ ! -f "$CONF_DIR/time.conf" ]; then
     msg 'time.conf' "Installing to $CONF_DIR/time.conf"
@@ -109,8 +105,8 @@ main() {
   setup_zsh
   setup_fish
   setup_bash
+
   echo -e "\nPlease edit $CONF_DIR/time.conf and restart your shell.\n"
-  echo DONE
 }
 
 main

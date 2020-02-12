@@ -12,16 +12,12 @@ msg() {
   shift
   if [ ! -z "$*" ]; then
     printf "%b" "* \e[1;37m[\e[0m\e[1;34m$topic\e[0m\e[1;37m]"
-    printf ' %.0s' $(seq ${#topic} 25)
+    printf ' %.0s' $(seq ${#topic} 10)
     printf "%b\n" "\e[0;32m$*\e[0m"
   fi
 }
 
 main() {
-  echo
-  echo '----=[ Prompt Reminder system installation ]=----'
-  echo
-
   # Check if the file already exists
   if [ -x "$BIN_DIR/prem" ]; then
     # Only upgrade the executable if the files differ
@@ -47,8 +43,6 @@ main() {
   else
     msg 'time.conf' "Already in place"
   fi
-
-  echo DONE
 }
 
 main
