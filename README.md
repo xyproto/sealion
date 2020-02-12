@@ -14,8 +14,8 @@ Be reminded about things that happen daily, such as lunch, by messages on the co
 
 ### User installation
 
-* Run `./prem-setup`, which will do the following:
-  * Place the script in `~/.config/prem/prem`, or upgrade an existing script.
+* Run `prem-setup`, which will do the following:
+  * Place a script in `~/.config/prem/prem`, or upgrade an existing script.
   * Place the configuration in `~/.config/prem/time.conf`. Will not modify existing configuration.
   * Set up bash and zsh, if not already set up.
   * This also includes the `on` and `off` shell functions for turning the prompt messages on or off.
