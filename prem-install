@@ -22,13 +22,22 @@ main() {
   echo '----=[ Prompt Reminder system installation ]=----'
   echo
 
-  # Check if the file alredy exists
+  # Check if the file already exists
   if [ -x "$BIN_DIR/prem" ]; then
     # Only upgrade the executable if the files differ
     diff -q "$SOURCE_DIR/prem" "$BIN_DIR/prem" 2>&1 1>/dev/null && msg prem 'Already in place' || (msg prem "Installing to $BIN_DIR/prem"; install -Dm755 "$SOURCE_DIR/prem" "$BIN_DIR/prem")
   else
     msg prem "Installing to $BIN_DIR/prem"
     install -Dm755 "$SOURCE_DIR/prem" "$BIN_DIR/prem"
+  fi
+
+  # Check if the file already exists
+  if [ -x "$BIN_DIR/prem-setup" ]; then
+    # Only upgrade the executable if the files differ
+    diff -q "$SOURCE_DIR/prem-setup" "$BIN_DIR/prem-setup" 2>&1 1>/dev/null && msg prem 'Already in place' || (msg prem "Installing to $BIN_DIR/prem-setup"; install -Dm755 "$SOURCE_DIR/prem-setup" "$BIN_DIR/prem-setup")
+  else
+    msg prem "Installing to $BIN_DIR/prem-setup"
+    install -Dm755 "$SOURCE_DIR/prem-setup" "$BIN_DIR/prem-setup"
   fi
 
   # Install to $SYS_DIR/time.conf

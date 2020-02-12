@@ -9,6 +9,7 @@ install:
 	./prem-install "${DESTDIR}" "${PREFIX}"
 
 uninstall:
-	rm -f "${PREFIX}/bin/prem"
-	rm -f "${PREFIX}/share/prem/time.conf"
-	rmdir "${PREFIX}/share/prem"
+	-rm -f "${PREFIX}/bin/prem"
+	-rm -f "${PREFIX}/bin/prem-setup"
+	-rm -f "${PREFIX}/share/prem/time.conf"
+	-rmdir "${PREFIX}/share/prem"
