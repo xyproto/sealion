@@ -1,10 +1,12 @@
 .PHONY: install uninstall
 
-PREFIX ?= /usr
 .DEFAULT_TARGET := install
 
+DESTDIR ?=
+PREFIX ?= /usr
+
 install:
-	./prem-install "${PREFIX}"
+	./prem-install "${DESTDIR}" "${PREFIX}"
 
 uninstall:
 	rm -f "${PREFIX}/bin/prem"

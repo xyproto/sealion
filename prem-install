@@ -1,7 +1,8 @@
 #!/bin/bash
 
 SOURCE_DIR=$(dirname "$0")
-PREFIX="${1:-/usr}"
+DESTDIR="$1"
+PREFIX="$DESTDIR${2:-/usr}"
 SYS_DIR=$PREFIX/share/prem
 BIN_DIR=$PREFIX/bin
 
@@ -31,9 +32,9 @@ main() {
   fi
 
   # Install to $SYS_DIR/time.conf
-  if [ ! -f $SYS_DIR/time.conf ]; then
-    msg 'time.conf' "Installing to $SYS_DIR_DIR/time.conf"
-    install -Dm644 "$SOURCE_DIR/time.example.conf" "$SYS_DIR/time.conf"
+  if [ ! -f $SYS_DIR/time.example.conf ]; then
+    msg 'time.conf' "Installing to $SYS_DIR_DIR/time.example.conf"
+    install -Dm644 "$SOURCE_DIR/time.example.conf" "$SYS_DIR/time.example.conf"
   else
     msg 'time.conf' "Already in place"
   fi
