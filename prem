@@ -64,7 +64,7 @@ def main():
             print(time_conf + ":", e)
             sys.exit(1)
     if not lines:
-        print("ERROR: Found no configuration for prem.")
+        print("Found no configuration for prem, try running prem-setup.")
         sys.exit(1)
     for line in lines:
         if line.strip().startswith("#"):
