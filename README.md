@@ -22,6 +22,8 @@ Be reminded about things that happen daily, such as lunch, by messages on the co
 
 * Edit `~/.config/prem/time.conf` to your liking and restart your shell.
 
+You might need to copy the `prem` script into `~/.config/prem` as well, for now.
+
 ### Test that it works
 
 * Typing `off` or `on` should disable or enable the prompt notification.
