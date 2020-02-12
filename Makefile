@@ -6,10 +6,10 @@ DESTDIR ?=
 PREFIX ?= /usr
 
 install:
-	./prem-install "${DESTDIR}" "${PREFIX}"
+	@install -Dm755 prem "$(DESTDIR)$(PREFIX)/bin/prem"
+	@install -Dm755 prem-setup "$(DESTDIR)$(PREFIX)/bin/prem-setup"
+	@install -Dm644 time.example.conf \
+	  "$(DESTDIR)$(PREFIX)/share/prem/time.example.conf"
 
 uninstall:
-	-rm -f "${PREFIX}/bin/prem"
-	-rm -f "${PREFIX}/bin/prem-setup"
-	-rm -f "${PREFIX}/share/prem/time.conf"
-	-rmdir "${PREFIX}/share/prem"
+	@rm -rf "${PREFIX}/bin/prem"{,-setup} "${PREFIX}/share/prem"
