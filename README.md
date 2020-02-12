@@ -1,40 +1,39 @@
-# Prompt Reminder Messages
+# Prompt Reminder
 
-Display messages right before the prompt at certain time intervals during the day.
+Be reminded about things that happen daily, such as lunch, by messages on the command line, directly after your prompt.
 
-## Goal
+## Quick installation
 
-Help you remember stuff during the day, by reminding you directly at the prompt in certain customizable time intervals.
+    sudo install -Dm755 prem-setup /usr/bin/prem-setup
+    sudo install -Dm755 prem /usr/bin/prem
 
-## Installation
-
-### Requirements
+## Requirements
 
 * Python 3
-* `bash`, `fish` or `zsh`
+* `bash`, `fish` or `zsh`.
 
 ### User installation
 
-* Run `./install.sh`, which will do the following:
-  * Place the script in `~/.config/promptmessage/promptmessage`, or upgrade an existing script.
-  * Place the configuration in `~/.config/promptmessage/time.conf`. Will not modify existing configuration.
+* Run `./prem-setup`, which will do the following:
+  * Place the script in `~/.config/prem/prem`, or upgrade an existing script.
+  * Place the configuration in `~/.config/prem/time.conf`. Will not modify existing configuration.
   * Set up bash and zsh, if not already set up.
   * This also includes the `on` and `off` shell functions for turning the prompt messages on or off.
 
-* Edit `~/.config/promptmessage/time.conf` to your liking and restart your shell.
+* Edit `~/.config/prem/time.conf` to your liking and restart your shell.
 
 ## Manual setup
 
-Just running the install script should be enough to set up `promptmessage`. If you would rather set things up manually, here are the suggested configuration snippets for your shell:
+Just running the install script should be enough to set up `prem`. If you would rather set things up manually, here are the suggested configuration snippets for your shell:
 
 ### Bash setup
 
 * Add the following to your `~/.bashrc`:
 
 ```bash
-# Prompt Messages
+# Prompt Reminder
 on() {
-  export PROMPT_COMMAND="/usr/bin/promptmessage"
+  export PROMPT_COMMAND="/usr/bin/prem"
   off() { unset PROMPT_COMMAND; }
 }
 
@@ -49,13 +48,13 @@ on() {
 * Add the following to your `~/.config/fish/config.fish`:
 
 ```fish
-# Prompt Messages
+# Prompt Reminder
 function on
-  function promptmessage --on-event fish_prompt
-    /usr/bin/promptmessage
+  function prem --on-event fish_prompt
+    /usr/bin/prem
   end
   function off
-    functions -e promptmessage
+    functions -e prem
   end
 end
 
@@ -70,9 +69,9 @@ if [ (hostname) = "work_pc" ]; and not count $SSH_TTY > /dev/null; on; end
 * Add the following to your `~/.zshrc`:
 
 ```zsh
-# Prompt Messages
+# Prompt Reminder
 on() {
-  precmd() { /usr/bin/promptmessage }
+  precmd() { /usr/bin/prem }
   off() { unset -f precmd }
 }
 
@@ -98,15 +97,18 @@ on() {
 Simple case:
 
 ```sh
-watch promptmessage
+watch prem
 ```
 
 For watching the notifications continuously in a terminal window (updated every 5 seconds, no title, highlighted diff):
 
 ```sh
-watch --color --differences --no-title --interval 5 promptmessage
+watch --color --differences --no-title --interval 5 prem
 ```
 
 ## General Info
 
-* Version: 0.8
+* Version: 1.0.0
+* License: MIT
+* Author: Alexander F. Rødseth &lt;xyproto@archlinux.org&gt;
+
