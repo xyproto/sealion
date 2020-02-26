@@ -2,6 +2,8 @@
 
 Be reminded about things that happen daily, such as lunch, by messages on the command line, directly after your prompt.
 
+The message is only displayed in certain time-intervals, not all the time.
+
 ## Quick installation
 
     sudo install -Dm755 prem-setup /usr/bin/prem-setup
@@ -54,4 +56,3 @@ watch --color --differences --no-title --interval 5 prem
 * Version: 1.1.0
 * License: MIT
 * Author: Alexander F. Rødseth &lt;xyproto@archlinux.org&gt;
-
