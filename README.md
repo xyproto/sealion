@@ -19,9 +19,7 @@ The message is only displayed in certain time-intervals, not all the time.
 * Run `prem-setup`, which will do the following:
   * Place a script in `~/.config/prem/prem`, or upgrade an existing script.
   * Place the configuration in `~/.config/prem/time.conf`. Will not modify existing configuration.
-  * Set up bash and zsh, if not already set up.
-  * This also includes the `on` and `off` shell functions for turning the prompt messages on or off.
-
+  * Add a few lines for setting up `prem` to the bash, zsh or fish configuration files, if not already added. This includes the `on` and `off` shell functions for turning the prompt messages on or off.
 * Edit `~/.config/prem/time.conf` to your liking and restart your shell.
 
 You might need to copy the `prem` script into `~/.config/prem` as well, for now.
