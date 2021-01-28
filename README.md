@@ -4,11 +4,15 @@
 
 Be reminded about things that happen daily, such as lunch, by messages on the command line, directly after your prompt.
 
-The message is only displayed in certain time-intervals, not all the time.
+The messages are displayed in configurable time-intervals.
 
 ## Quick installation
 
     sudo make install
+    sealion-setup
+
+## User setup on a system where The Sea Lion Prompt Reminder is already installed
+
     sealion-setup
 
 ## Requirements
@@ -16,28 +20,17 @@ The message is only displayed in certain time-intervals, not all the time.
 * Python 3
 * One or more of: `bash`, `fish` and `zsh`.
 
-### User installation
+## Quick enable and disable
 
-* Run `sealion-setup`, which will do the following:
-  * Place a script in `~/.config/sealion/sealion`, or upgrade an existing script.
-  * Place the configuration in `~/.config/sealion.conf`. Will not modify existing configuration.
-  * Add a few lines for setting up `sealion` to the bash, zsh or fish configuration files, if not already added. This includes the `on` and `off` shell functions for turning the prompt messages on or off.
-* Edit `~/.config/sealion.conf` to your liking and restart your shell.
+* Type `on` or `off` to enable or disable The Sea Lion Prompt Reminder for the current shell session.
 
-You might need to copy the `sealion` script into `~/.config/sealion` as well, for now.
-
-### Test that it works
-
-* Typing `off` or `on` should disable or enable the prompt notification.
-
-## Features and limitations
+## Configuration format
 
 * `sealion.conf` needs to follow the existing format strictly (using `:` and `-` at the appropriate places) or there will be errors.
 * Comments in `sealion.conf` are allowed, as long as they are single-line comments starting with `#`.
 * If a description in `sealion.conf` contains `%m`, it will be replaced with the number of minutes left when outputting the message.
-* If the `TERM` environment variable contains `color`, the output message will be in color.
 
-## For watching the notifications continuously
+## Keeping watches in a separate terminal emulator window
 
 Simple case:
 
@@ -45,7 +38,7 @@ Simple case:
 watch sealion
 ```
 
-For watching the notifications continuously in a terminal window (updated every 5 seconds, no title, highlighted diff):
+For updating every 5 seconds, with no title and highlighting any differences:
 
 ```sh
 watch --color --differences --no-title --interval 5 sealion
@@ -53,9 +46,9 @@ watch --color --differences --no-title --interval 5 sealion
 
 # Manual Setup
 
-This should not normally be needed, since `sealion-setup` handles this per user.
+The following is not normally needed, since `sealion-setup` handles this per user, but it helps to explain what is being set up by `sealion-setup`:
 
-### Bash setup
+### Manual Bash setup
 
 * Add the following to your `~/.bashrc`:
 
@@ -70,9 +63,9 @@ on() {
 [ $HOSTNAME = "work_pc" ] && [ ! -n "$SSH_TTY" ] && on || true
 ```
 
-* NOTE: Change `work_pc` to whatever the hostname of your work pc is.
+* NOTE: Change `work_pc` to whatever the hostname of your work PC is.
 
-### Fish setup
+### Manual Fish setup
 
 * Add the following to your `~/.config/fish/config.fish`:
 
@@ -91,9 +84,9 @@ end
 if [ (hostname) = "work_pc" ]; and not count $SSH_TTY > /dev/null; on; end
 ```
 
-* NOTE: Change `work_pc` to whatever the hostname of your work pc is.
+* NOTE: Change `work_pc` to whatever the hostname of your work PC is.
 
-### Zsh setup
+### Manual Zsh setup
 
 * Add the following to your `~/.zshrc`:
 
@@ -108,7 +101,7 @@ on() {
 [ "$HOST" = "work_pc" ] && [ ! -n "$SSH_TTY" ] && on || true
 ```
 
-* NOTE: Change `work_pc` to whatever the hostname of your work pc is.
+* NOTE: Change `work_pc` to whatever the hostname of your work PC is.
 
 ## General Info
 
