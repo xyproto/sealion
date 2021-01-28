@@ -8,17 +8,19 @@ The messages are displayed in configurable time-intervals.
 
 ## Quick installation
 
+    git clone https://github.com/xyproto/sealion
+    cd sealion
     sudo make install
     sealion-setup
 
-## User setup on a system where The Sea Lion Prompt Reminder is already installed
+## User setup on a system where Sea Lion is installed
 
     sealion-setup
 
 ## Requirements
 
 * Python 3
-* One or more of: `bash`, `fish` and `zsh`.
+* `bash`, `fish` and/or `zsh`.
 
 ## Quick enable and disable
 
