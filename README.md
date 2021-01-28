@@ -1,5 +1,7 @@
 # The Sea Lion Prompt Reminder
 
+![sealion](img/sealion.jpg)
+
 Be reminded about things that happen daily, such as lunch, by messages on the command line, directly after your prompt.
 
 The message is only displayed in certain time-intervals, not all the time.
