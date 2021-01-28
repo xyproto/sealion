@@ -7,6 +7,8 @@ import os.path
 import sys
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
+
+# Valid configuration files
 time_confs = [
     os.path.expanduser("~/.config/prem.conf"),
     os.path.expanduser("~/.config/prem/time.conf"),

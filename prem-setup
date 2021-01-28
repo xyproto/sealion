@@ -106,7 +106,7 @@ main() {
   setup_fish
   setup_bash
 
-  echo -e "\nPlease edit $CONF_DIR/prem.conf and restart your shell.\n"
+  echo -e "\nPlease edit $CONF_DIR/prem.conf and restart your shell (or type \$SHELL).\n"
 }
 
 main
