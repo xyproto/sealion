@@ -26,14 +26,13 @@ setup_zsh() {
       msg zsh 'Setting up'
       cat << EOF >> ~/.zshrc
 
-  # Prompt Reminder
-  on() {
-    precmd() { /usr/bin/sealion }
-    off() { unset -f precmd }
-  }
-
-  # Enable prompt messages if on the right host and not over ssh
-  [ "\$HOST" = "$HOSTNAME" ] && [ ! -n "\$SSH_TTY" ] && on || true
+# Prompt Reminder
+on() {
+  precmd() { /usr/bin/sealion }
+  off() { unset -f precmd }
+}
+# Enable prompt messages if on the right host and not over ssh
+[ "\$HOST" = "$HOSTNAME" ] && [ ! -n "\$SSH_TTY" ] && on || true
 EOF
     fi
   fi
@@ -51,14 +50,13 @@ setup_bash() {
       msg bash 'Setting up'
       cat << EOF >> ~/.bashrc
 
-  # Prompt Reminder
-  on() {
-    export PROMPT_COMMAND="/usr/bin/sealion"
-    off() { unset PROMPT_COMMAND; }
-  }
-
-  # Enable prompt messages if on the right host and not over ssh
-  [ \$HOSTNAME = "$HOSTNAME" ] && [ ! -n "\$SSH_TTY" ] && on || true
+# Prompt Reminder
+on() {
+  export PROMPT_COMMAND="/usr/bin/sealion"
+  off() { unset PROMPT_COMMAND; }
+}
+# Enable prompt messages if on the right host and not over ssh
+[ \$HOSTNAME = "$HOSTNAME" ] && [ ! -n "\$SSH_TTY" ] && on || true
 EOF
     fi
   fi
@@ -75,18 +73,18 @@ setup_fish() {
       msg fish 'Setting up'
       cat << EOF >> ~/.config/fish/config.fish
 
-  # Prompt Reminder
-  function on
-    function sealion --on-event fish_prompt
-      /usr/bin/sealion
-    end
-    function off
-      functions -e sealion
-    end
+# Prompt Reminder
+function on
+  function sealion --on-event fish_prompt
+    /usr/bin/sealion
   end
+  function off
+    functions -e sealion
+  end
+end
 
-  # Enable prompt messages if on the right host and not over ssh
-  if [ (hostname) = "$HOSTNAME" ]; and not count \$SSH_TTY > /dev/null; on; end
+# Enable prompt messages if on the right host and not over ssh
+if [ (hostname) = "$HOSTNAME" ]; and not count \$SSH_TTY > /dev/null; on; end
 EOF
     fi
   fi
@@ -95,10 +93,10 @@ EOF
 main() {
   # Install default config to ~/$CONF_DIR/sealion.conf
   if [ ! -f "$CONF_DIR/sealion.conf" ]; then
-    msg 'time.conf' "Installing to $CONF_DIR/sealion.conf"
+    msg 'sealion.conf' "Installing to $CONF_DIR/sealion.conf"
     install -Dm644 "$SYS_DIR/sealion.example.conf" "$CONF_DIR/sealion.conf"
   else
-    msg 'sealion.conf' "Already in place"
+    msg 'sealion.conf' "Already in place: $CONF_DIR/sealion.conf"
   fi
 
   # Setup shells
