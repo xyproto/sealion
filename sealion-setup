@@ -1,7 +1,7 @@
 #!/bin/sh
 
 CONF_DIR="$HOME/.config"
-SYS_DIR="/usr/share/prem"
+SYS_DIR="/usr/share/sealion"
 
 # msg outputs a topic + green message, with a final newline
 msg() {
@@ -28,7 +28,7 @@ setup_zsh() {
 
   # Prompt Reminder
   on() {
-    precmd() { /usr/bin/prem }
+    precmd() { /usr/bin/sealion }
     off() { unset -f precmd }
   }
 
@@ -53,7 +53,7 @@ setup_bash() {
 
   # Prompt Reminder
   on() {
-    export PROMPT_COMMAND="/usr/bin/prem"
+    export PROMPT_COMMAND="/usr/bin/sealion"
     off() { unset PROMPT_COMMAND; }
   }
 
@@ -68,7 +68,7 @@ setup_fish() {
   # Set up fish, if not already set up
   if [ -d ~/.config/fish ]; then
     already=0
-    grep -q -F 'function prem --on-event fish_prompt' ~/.config/fish/config.fish 2>/dev/null && already=1
+    grep -q -F 'function sealion --on-event fish_prompt' ~/.config/fish/config.fish 2>/dev/null && already=1
     if [ "$already" == "1" ]; then
       msg fish 'Already set up'
     else
@@ -77,11 +77,11 @@ setup_fish() {
 
   # Prompt Reminder
   function on
-    function prem --on-event fish_prompt
-      /usr/bin/prem
+    function sealion --on-event fish_prompt
+      /usr/bin/sealion
     end
     function off
-      functions -e prem
+      functions -e sealion
     end
   end
 
@@ -93,12 +93,12 @@ EOF
 }
 
 main() {
-  # Install default config to ~/$CONF_DIR/prem.conf
-  if [ ! -f "$CONF_DIR/prem.conf" ]; then
-    msg 'time.conf' "Installing to $CONF_DIR/prem.conf"
-    install -Dm644 "$SYS_DIR/prem.example.conf" "$CONF_DIR/prem.conf"
+  # Install default config to ~/$CONF_DIR/sealion.conf
+  if [ ! -f "$CONF_DIR/sealion.conf" ]; then
+    msg 'time.conf' "Installing to $CONF_DIR/sealion.conf"
+    install -Dm644 "$SYS_DIR/sealion.example.conf" "$CONF_DIR/sealion.conf"
   else
-    msg 'prem.conf' "Already in place"
+    msg 'sealion.conf' "Already in place"
   fi
 
   # Setup shells
@@ -106,7 +106,7 @@ main() {
   setup_fish
   setup_bash
 
-  echo -e "\nPlease edit $CONF_DIR/prem.conf and restart your shell (or type \$SHELL).\n"
+  echo -e "\nPlease edit $CONF_DIR/sealion.conf and restart your shell (or type \$SHELL).\n"
 }
 
 main

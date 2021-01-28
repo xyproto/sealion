@@ -10,12 +10,14 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 # Valid configuration files
 time_confs = [
-    os.path.expanduser("~/.config/prem.conf"),
-    os.path.expanduser("~/.config/prem/time.conf"),
-    os.path.expanduser("~/.prem/time.conf"),
-    os.path.expanduser("~/.premrc"),
-    "/etc/prem/time.conf",
-    "/etc/premrc",
+    os.path.expanduser("~/.config/sealion.conf"),
+    os.path.expanduser("~/.config/sealion/sealion.conf"),
+    os.path.expanduser("~/.sealion/sealion.conf"),
+    os.path.expanduser("~/.sealionrc"),
+    os.path.expanduser("~/.sealion.conf"),
+    "/etc/sealionrc",
+    "/etc/sealion.conf",
+    "/etc/sealion/sealion.conf",
 ]
 
 
@@ -69,7 +71,7 @@ def main():
             print(time_conf + ":", e)
             sys.exit(1)
     if not found:
-        print("Found no configuration for prem, try running prem-setup.")
+        print("Found no configuration for sealion, try running sealion-setup.")
         sys.exit(1)
     for line in lines:
         if line.strip().startswith("#"):
