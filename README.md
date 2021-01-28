@@ -32,6 +32,14 @@ The messages are displayed in configurable time-intervals.
 * Comments in `sealion.conf` are allowed, as long as they are single-line comments starting with `#`.
 * If a description in `sealion.conf` contains `%m`, it will be replaced with the number of minutes left when outputting the message.
 
+Example configuration file:
+
+```
+11:00 - 11:20 : lunch 11:20
+```
+
+This will add a propmpt reminder from 11:00 to 11:20 with the message "lunch 11:20".
+
 ## Keeping watches in a separate terminal emulator window
 
 Simple case:
