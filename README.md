@@ -46,7 +46,9 @@ For updating every 5 seconds, with no title and highlighting any differences:
 watch --color --differences --no-title --interval 5 sealion
 ```
 
-![sea lion controversy](http://wondermark.com/c/2014-09-19-1062sea.png)
+## Unrelated comic strip
+
+![sea lion](http://wondermark.com/c/2014-09-19-1062sea.png)
 
 # Manual Setup
 
