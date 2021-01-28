@@ -1,14 +1,15 @@
 .PHONY: install uninstall
 
-.DEFAULT_TARGET := install
-
 DESTDIR ?=
 PREFIX ?= /usr
+
+all:
+	@echo Nothing to do
 
 install:
 	@install -Dm755 prem "$(DESTDIR)$(PREFIX)/bin/prem"
 	@install -Dm755 prem-setup "$(DESTDIR)$(PREFIX)/bin/prem-setup"
-	@install -Dm644 time.example.conf \
+	@install -Dm644 prem.example.conf \
 	  "$(DESTDIR)$(PREFIX)/share/prem/prem.example.conf"
 
 uninstall:
