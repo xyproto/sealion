@@ -6,8 +6,11 @@ The message is only displayed in certain time-intervals, not all the time.
 
 ## Quick installation
 
-    sudo install -Dm755 prem-setup /usr/bin/prem-setup
-    sudo install -Dm755 prem /usr/bin/prem
+    sudo make install
+    prem-setup
+    echo '11:00 - 11:20 : lunch 11:20' >> ~/.config/prem.conf
+
+Then
 
 ## Requirements
 
