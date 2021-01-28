@@ -1,4 +1,4 @@
-# The Sea Lion Prompt Reminder
+# Sea Lion Prompt Reminder
 
 ![sealion](img/sealion.jpg)
 
@@ -24,7 +24,7 @@ The messages are displayed in configurable time-intervals.
 
 ## Quick enable and disable
 
-* Type `on` or `off` to enable or disable The Sea Lion Prompt Reminder for the current shell session.
+* Type `on` or `off` to enable or disable Sea Lion for the current shell session.
 
 ## Configuration format
 
