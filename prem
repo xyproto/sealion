@@ -8,6 +8,7 @@ import sys
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 time_confs = [
+    os.path.expanduser("~/.config/prem.conf"),
     os.path.expanduser("~/.config/prem/time.conf"),
     os.path.expanduser("~/.prem/time.conf"),
     os.path.expanduser("~/.premrc"),
@@ -52,9 +53,11 @@ def main():
     events = []
 
     lines = []
+    found = False
     for time_conf in time_confs:
         try:
-            lines = open(time_conf, encoding="utf-8").read().split("\n")[:-1]
+            lines = open(time_conf, encoding="utf-8").read().split("\n")
+            found = True
         except FileNotFoundError:
             continue
         except PermissionError as e:
@@ -63,7 +66,7 @@ def main():
         except UnicodeDecodeError as e:
             print(time_conf + ":", e)
             sys.exit(1)
-    if not lines:
+    if not found:
         print("Found no configuration for prem, try running prem-setup.")
         sys.exit(1)
     for line in lines:

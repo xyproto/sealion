@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CONF_DIR="$HOME/.config/prem"
+CONF_DIR="$HOME/.config"
 SYS_DIR="/usr/share/prem"
 
 # msg outputs a topic + green message, with a final newline
@@ -93,12 +93,12 @@ EOF
 }
 
 main() {
-  # Install default config to ~/$CONF_DIR/time.conf
-  if [ ! -f "$CONF_DIR/time.conf" ]; then
-    msg 'time.conf' "Installing to $CONF_DIR/time.conf"
-    install -Dm644 "$SYS_DIR/time.example.conf" "$CONF_DIR/time.conf"
+  # Install default config to ~/$CONF_DIR/prem.conf
+  if [ ! -f "$CONF_DIR/prem.conf" ]; then
+    msg 'time.conf' "Installing to $CONF_DIR/prem.conf"
+    install -Dm644 "$SYS_DIR/prem.example.conf" "$CONF_DIR/prem.conf"
   else
-    msg 'time.conf' "Already in place"
+    msg 'prem.conf' "Already in place"
   fi
 
   # Setup shells
@@ -106,7 +106,7 @@ main() {
   setup_fish
   setup_bash
 
-  echo -e "\nPlease edit $CONF_DIR/time.conf and restart your shell.\n"
+  echo -e "\nPlease edit $CONF_DIR/prem.conf and restart your shell.\n"
 }
 
 main
