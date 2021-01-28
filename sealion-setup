@@ -104,7 +104,7 @@ main() {
   setup_fish
   setup_bash
 
-  echo -e "\nPlease edit $CONF_DIR/sealion.conf and restart your shell (or type \$SHELL).\n"
+  echo -e "\nAll done. Now run \$SHELL, or open a new terminal emulator window.\n"
 }
 
 main
