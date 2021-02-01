@@ -35,7 +35,7 @@ The messages are displayed in configurable time-intervals.
 Example configuration file:
 
 ```
-11:00 - 11:20 : lunch 11:20
+11:00 - 11:20 : lunch 11:20, in %m minutes
 ```
 
 This will add a prompt reminder from 11:00 to 11:20 with the message "lunch 11:20".
