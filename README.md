@@ -38,7 +38,7 @@ Example configuration file:
 11:00 - 11:20 : lunch 11:20, in %m minutes
 ```
 
-This will add a prompt reminder from 11:00 to 11:20 with the message "lunch 11:20".
+This will add a prompt reminder from 11:00 to 11:20 with the message "lunch 11:20, in N minutes", where N is the number of minutes left.
 
 ## Keeping watches in a separate terminal emulator window
 
