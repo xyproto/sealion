@@ -18,7 +18,7 @@ System installation:
     
     sealion-setup
 
-## User setup on a system where Sea Lion is installed
+## User setup on a system where Sea Lion has already been installed
 
     sealion-setup
 
