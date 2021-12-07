@@ -28,6 +28,8 @@ Messages are displayed in configurable time-intervals.
 
 ## Configuration format
 
+<img src="http://wondermark.com/c/2014-09-19-1062sea.png" width="420" align="right">
+
 Example configuration file:
 
 ```
@@ -53,10 +55,6 @@ For updating every 5 seconds, with no title and highlighting any differences:
 ```sh
 watch --color --differences --no-title --interval 5 sealion
 ```
-
-## Sea lions
-
-<img src="http://wondermark.com/c/2014-09-19-1062sea.png" width="420" align="right">
 
 # Manual Setup
 
