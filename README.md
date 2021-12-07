@@ -1,6 +1,6 @@
 # Sea Lion Lunch Reminder
 
-<img src="img/sealion.jpg" width="420" align="right">
+<img src="img/sealion.jpg" width="320" align="right">
 
 Be reminded to have lunch, directly on the command line.
 
@@ -28,7 +28,7 @@ Messages are displayed in configurable time-intervals.
 
 ## Configuration format
 
-<img src="http://wondermark.com/c/2014-09-19-1062sea.png" width="420" align="right">
+<img src="http://wondermark.com/c/2014-09-19-1062sea.png" width="512" align="right">
 
 Example configuration file:
 
