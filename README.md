@@ -2,7 +2,7 @@
 
 ![sealion](img/sealion.jpg)
 
-Be reminded to eat lunch, directly on the command line.
+Be reminded to have lunch, directly on the command line.
 
 Messages are displayed in configurable time-intervals.
 
@@ -28,10 +28,6 @@ Messages are displayed in configurable time-intervals.
 
 ## Configuration format
 
-* `sealion.conf` needs to follow the existing format strictly (using `:` and `-` at the appropriate places) or there will be errors.
-* Comments in `sealion.conf` are allowed, as long as they are single-line comments starting with `#`.
-* If a description in `sealion.conf` contains `%m`, it will be replaced with the number of minutes left when outputting the message.
-
 Example configuration file:
 
 ```
@@ -39,6 +35,10 @@ Example configuration file:
 ```
 
 This will add a prompt reminder from 11:00 to 11:20 with the message "lunch 11:20, in N minutes", where N is the number of minutes left.
+
+* `sealion.conf` needs to follow the existing format (using `:` and `-` at the appropriate places) or there will be errors.
+* Comments in `sealion.conf` are allowed, as long as they are single-line comments starting with `#`.
+* If a description in `sealion.conf` contains `%m`, it will be replaced with the number of minutes left when outputting the message.
 
 ## Keeping watches in a separate terminal emulator window
 
@@ -54,7 +54,7 @@ For updating every 5 seconds, with no title and highlighting any differences:
 watch --color --differences --no-title --interval 5 sealion
 ```
 
-## Comic strip about sea lions
+## Sea lions
 
 ![sea lion](http://wondermark.com/c/2014-09-19-1062sea.png)
 
