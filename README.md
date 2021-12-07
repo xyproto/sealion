@@ -8,9 +8,14 @@ Messages are displayed in configurable time-intervals.
 
 ## Quick installation
 
+System installation:
+
     git clone https://github.com/xyproto/sealion
     cd sealion
     sudo make install
+    
+ User setup:   
+    
     sealion-setup
 
 ## User setup on a system where Sea Lion is installed
