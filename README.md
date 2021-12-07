@@ -1,6 +1,6 @@
-# Sea Lion Prompt Lunch Reminder
+# Sea Lion Lunch Reminder
 
-![sealion](img/sealion.jpg)
+<img src="img/sealion.jpg" width="420" align="right">
 
 Be reminded to have lunch, directly on the command line.
 
