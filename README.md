@@ -56,7 +56,7 @@ watch --color --differences --no-title --interval 5 sealion
 
 ## Sea lions
 
-![sea lion](http://wondermark.com/c/2014-09-19-1062sea.png)
+<img src="http://wondermark.com/c/2014-09-19-1062sea.png" width="420" align="right">
 
 # Manual Setup
 
