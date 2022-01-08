@@ -41,7 +41,7 @@ Example configuration file:
 
 This will add a prompt reminder from 11:00 to 11:20 with the message "lunch 11:20, in N minutes", where N is the number of minutes left.
 
-<img src="http://wondermark.com/c/2014-09-19-1062sea.png" width="512" align="right">
+<img src="https://i0.wp.com/francesbell.com/wp-content/uploads/2015/02/sealion-cartoon.png" width="512" align="right">
 
 * `sealion.conf` needs to follow the existing format (using `:` and `-` at the appropriate places) or there will be errors.
 * Comments in `sealion.conf` are allowed, as long as they are single-line comments starting with `#`.
