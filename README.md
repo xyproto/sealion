@@ -18,7 +18,7 @@ This will add a prompt reminder from 11:00 to 11:20 with the message "lunch 11:2
 
 <img src="https://i0.wp.com/francesbell.com/wp-content/uploads/2015/02/sealion-cartoon.png" width="512" align="right">
 
-* `sealion.conf` needs to follow the existing format (using `:` and `-` at the appropriate places).
+* `sealion.conf` needs to follow the existing format (using `:` and `-` in the appropriate places).
 * Comments in `sealion.conf` are allowed, as long as they are single-line comments starting with `#`.
 * If a description in `sealion.conf` contains `%m`, it will be replaced with the number of minutes left when outputting the message.
 
