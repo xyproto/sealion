@@ -2,7 +2,7 @@
 
 <img src="img/sealion.jpg" width="330" align="right">
 
-Be reminded to have lunch, directly on the command line.
+Be reminded to have lunch, directly in the prompt.
 
 Messages are displayed in configurable time-intervals.
 
