@@ -6,9 +6,7 @@ Be reminded to have lunch, directly on the command line.
 
 Messages are displayed in configurable time-intervals.
 
-## Configuration
-
-Example configuration file:
+## Example configuration file
 
 ```
 11:00 - 11:20 : lunch 11:20, in %m minutes
@@ -16,9 +14,11 @@ Example configuration file:
 
 This will add a prompt reminder from 11:00 to 11:20 with the message "lunch 11:20, in N minutes", where N is the number of minutes left.
 
+## Configuration
+
 <img src="https://i0.wp.com/francesbell.com/wp-content/uploads/2015/02/sealion-cartoon.png" width="512" align="right">
 
-* `sealion.conf` needs to follow the existing format (using `:` and `-` at the appropriate places) or there will be errors.
+* `sealion.conf` needs to follow the existing format (using `:` and `-` at the appropriate places).
 * Comments in `sealion.conf` are allowed, as long as they are single-line comments starting with `#`.
 * If a description in `sealion.conf` contains `%m`, it will be replaced with the number of minutes left when outputting the message.
 
