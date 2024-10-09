@@ -6,25 +6,17 @@ Be reminded to have lunch, directly in your prompt.
 
 Messages are displayed in configurable time-intervals.
 
-## Example configuration file
+### Example configuration
 
-```
+`~/.config/sealion.conf`
+
+```c
 11:00 - 11:20 : lunch 11:20, in %m minutes
 ```
 
 This will add a prompt reminder from 11:00 to 11:20 with the message "lunch 11:20, in N minutes", where N is the number of minutes left.
 
-## Configuration
-
-<img src="https://i0.wp.com/francesbell.com/wp-content/uploads/2015/02/sealion-cartoon.png" width="512" align="right">
-
-* `sealion.conf` needs to follow the existing format (using `:` and `-` in the appropriate places).
-* Comments in `sealion.conf` are allowed, as long as they are single-line comments starting with `#`.
-* If a description in `sealion.conf` contains `%m`, it will be replaced with the number of minutes left when outputting the message.
-
-Type `on` or `off` to enable or disable Sea Lion for the current shell session.
-
-## Quick installation
+### Quick installation
 
 System installation:
 
@@ -36,7 +28,18 @@ System installation:
     
     sealion-setup
 
-## User setup on a system where Sea Lion has already been installed
+## Configuration
+
+<img src="https://i0.wp.com/francesbell.com/wp-content/uploads/2015/02/sealion-cartoon.png" width="512" align="right">
+
+* `sealion.conf` needs to follow the existing format (using `:` and `-` in the appropriate places).
+* Comments in `sealion.conf` are allowed, as long as they are single-line comments starting with `#`.
+* If a description in `sealion.conf` contains `%m`, it will be replaced with the number of minutes left when outputting the message.
+
+Type `on` or `off` to enable or disable Sea Lion for the current shell session.
+
+
+### User setup on a system where Sea Lion has already been installed
 
     sealion-setup
 
@@ -59,7 +62,7 @@ For updating every 5 seconds, with no title and highlighting any differences:
 watch --color --differences --no-title --interval 5 sealion
 ```
 
-# Manual Setup
+## Manual Setup
 
 The following is not normally needed, since `sealion-setup` handles this per user, but it helps to explain what is being set up by `sealion-setup`:
 
