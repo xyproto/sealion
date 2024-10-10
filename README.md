@@ -48,7 +48,7 @@ Type `on` or `off` to enable or disable Sea Lion for the current shell session.
 * Python 3
 * `bash`, `fish` or `zsh`.
 
-## Keeping watches in a separate terminal emulator window
+## Alternative use: Run watch in a separate terminal emulator
 
 Simple case:
 
